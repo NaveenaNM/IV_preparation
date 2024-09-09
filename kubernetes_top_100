@@ -1,0 +1,321 @@
+Here is a list of **100 intermediate-level Kubernetes interview questions** along with their answers. This set covers essential Kubernetes concepts, tools, and real-world scenarios you may encounter.
+
+### Kubernetes Basics
+
+1. **What is Kubernetes?**
+   - Kubernetes is an open-source container orchestration platform used to automate deploying, scaling, and managing containerized applications.
+
+2. **What are Pods in Kubernetes?**
+   - Pods are the smallest deployable units in Kubernetes, representing a group of one or more containers with shared resources.
+
+3. **What is a Namespace in Kubernetes?**
+   - Namespaces are virtual clusters within a Kubernetes cluster, used to divide cluster resources among multiple users or teams.
+
+4. **What is Kubelet?**
+   - Kubelet is an agent that runs on each node and ensures containers are running properly by communicating with the Kubernetes API server.
+
+5. **What is Kube-proxy?**
+   - Kube-proxy is responsible for network traffic routing within the Kubernetes cluster and implements service networking by maintaining network rules.
+
+6. **What are Labels in Kubernetes?**
+   - Labels are key-value pairs attached to objects like Pods, which are used to organize and select subsets of objects.
+
+7. **What is a Service in Kubernetes?**
+   - A Service is an abstraction that exposes Pods as a network service, enabling communication between applications inside and outside the cluster.
+
+8. **What are the types of Services in Kubernetes?**
+   - ClusterIP, NodePort, LoadBalancer, ExternalName.
+
+9. **What is a ReplicaSet?**
+   - ReplicaSet ensures a specified number of pod replicas are running at all times, replacing failed pods automatically.
+
+10. **How does Deployment work in Kubernetes?**
+    - A Deployment provides declarative updates to Pods and ReplicaSets, allowing easy scaling, updating, and rollback.
+
+### Kubernetes Architecture
+
+11. **What are the main components of a Kubernetes Cluster?**
+    - Master node (API Server, Controller Manager, Scheduler, etcd) and worker nodes (Kubelet, Kube-proxy, container runtime).
+
+12. **What is etcd in Kubernetes?**
+    - Etcd is a distributed key-value store that stores Kubernetes cluster configuration data.
+
+13. **What is the role of the API Server?**
+    - The API server is the front-end for the Kubernetes control plane, handling all cluster operations through RESTful API calls.
+
+14. **What is a DaemonSet?**
+    - A DaemonSet ensures that a pod runs on all (or some) nodes in a cluster, typically used for log collection or monitoring agents.
+
+15. **What is the Scheduler in Kubernetes?**
+    - The Scheduler assigns pods to nodes based on resource requirements and availability.
+
+16. **What is the Controller Manager?**
+    - The Controller Manager runs various controllers that regulate the state of the system, like the ReplicaSet controller, Job controller, etc.
+
+17. **How does Kubernetes handle persistent storage?**
+    - Kubernetes uses PersistentVolumes (PV) and PersistentVolumeClaims (PVC) to abstract the underlying storage.
+
+18. **What is a Persistent Volume (PV)?**
+    - PV is a piece of storage in the cluster that has been provisioned by an administrator or dynamically provisioned using Storage Classes.
+
+19. **What is a StatefulSet?**
+    - StatefulSet is used to manage stateful applications, ensuring the stable and persistent identity and storage of pods.
+
+20. **What is a Job in Kubernetes?**
+    - A Job creates one or more pods and ensures they complete successfully, typically used for batch processing tasks.
+
+### Kubernetes Networking
+
+21. **What is a ClusterIP Service?**
+    - ClusterIP exposes the service internally to the cluster, making it accessible only within the cluster.
+
+22. **What is a NodePort Service?**
+    - NodePort exposes the service externally on each node’s IP at a static port, allowing external access to the cluster.
+
+23. **What is a LoadBalancer Service?**
+    - LoadBalancer service exposes the service externally using a cloud provider’s load balancer.
+
+24. **How does Kubernetes networking work?**
+    - Kubernetes uses flat networking, where each pod gets its own IP address. This allows all pods to communicate with each other without NAT.
+
+25. **What is Network Policy?**
+    - Network Policy defines how pods communicate with each other and with external systems, allowing fine-grained control over network traffic.
+
+26. **What is the role of CNI in Kubernetes?**
+    - Container Network Interface (CNI) is used to configure networking for containers and ensures they are reachable across the cluster.
+
+27. **What are some popular CNI plugins?**
+    - Flannel, Calico, Weave, Cilium.
+
+28. **What is an Ingress in Kubernetes?**
+    - Ingress exposes HTTP/HTTPS routes from outside the cluster to services within the cluster, based on rules defined for routing.
+
+29. **How do you secure network traffic in Kubernetes?**
+    - By using Network Policies to control the traffic between pods and services, and by securing ingress/egress traffic with TLS.
+
+30. **What is an Ingress Controller?**
+    - An Ingress Controller is responsible for fulfilling the Ingress resource by provisioning external load balancers and managing routing rules.
+
+### Kubernetes Storage
+
+31. **What is a PersistentVolumeClaim (PVC)?**
+    - A PVC is a request for storage by a user, which binds to a PersistentVolume (PV) in the cluster.
+
+32. **What are the access modes for PersistentVolumes?**
+    - ReadWriteOnce, ReadOnlyMany, ReadWriteMany.
+
+33. **What is a StorageClass in Kubernetes?**
+    - StorageClass allows dynamic provisioning of persistent volumes and defines the type of storage (e.g., SSD, HDD) and its properties.
+
+34. **How does dynamic volume provisioning work in Kubernetes?**
+    - Kubernetes uses StorageClasses to dynamically provision storage when a PVC requests storage with a particular class.
+
+35. **What is the difference between a StatefulSet and a Deployment?**
+    - StatefulSet provides guarantees about the ordering and uniqueness of pods, while a Deployment focuses on stateless applications.
+
+36. **What is VolumeMount in Kubernetes?**
+    - VolumeMount is a specification that defines how a volume is mounted within a container in a pod.
+
+37. **What is the difference between EmptyDir and HostPath volume?**
+    - EmptyDir is temporary storage that is deleted when the pod is terminated, while HostPath mounts a file or directory from the node’s filesystem.
+
+38. **What is a ConfigMap in Kubernetes?**
+    - ConfigMap is used to store configuration data in key-value pairs that can be used by pods and services.
+
+39. **What is a Secret in Kubernetes?**
+    - A Secret stores sensitive information like passwords, tokens, or keys in an encrypted format.
+
+40. **What is the difference between ConfigMap and Secret?**
+    - ConfigMap stores non-sensitive configuration data, while Secret stores sensitive data in an encrypted format.
+
+### Autoscaling & Monitoring
+
+41. **What is Horizontal Pod Autoscaling (HPA)?**
+    - HPA automatically scales the number of pods in a deployment or replica set based on observed CPU/memory usage or custom metrics.
+
+42. **What is Vertical Pod Autoscaling (VPA)?**
+    - VPA automatically adjusts the CPU and memory requests/limits for running pods based on their observed resource usage.
+
+43. **What is a ResourceQuota in Kubernetes?**
+    - ResourceQuota restricts the total amount of resources (CPU, memory, etc.) that a namespace can consume.
+
+44. **What are Resource Limits in Kubernetes?**
+    - Resource Limits specify the maximum amount of CPU and memory a container can use.
+
+45. **How do you monitor Kubernetes clusters?**
+    - By using tools like Prometheus, Grafana, and metrics-server to monitor resource usage, cluster health, and application performance.
+
+46. **What is the metrics-server?**
+    - Metrics-server is a lightweight cluster-wide aggregator of resource usage data used for autoscaling and monitoring.
+
+47. **How does Kubernetes handle logging?**
+    - Kubernetes allows logging via stdout/stderr of containers, and centralized logging can be set up using tools like Fluentd and ELK stack.
+
+48. **What is the difference between Logs and Metrics?**
+    - Logs provide detailed records of system or application events, while metrics provide quantitative measurements (CPU usage, memory, etc.).
+
+49. **What is the role of Prometheus in Kubernetes?**
+    - Prometheus is used for monitoring and alerting based on metrics collected from Kubernetes nodes and applications.
+
+50. **What is Kube-state-metrics?**
+    - Kube-state-metrics is a Kubernetes component that listens to the Kubernetes API server and generates metrics about the state of objects.
+
+### Advanced Concepts
+
+51. **What is Helm in Kubernetes?**
+    - Helm is a package manager for Kubernetes, which simplifies the deployment, versioning, and management of Kubernetes applications.
+
+52. **How does Helm chart work?**
+    - A Helm chart is a collection of YAML templates and configurations used to describe and deploy an application in Kubernetes.
+
+53. **What is a Tiller in Helm?**
+    - (Helm v2) Tiller was a server-side component of Helm responsible for interacting with the Kubernetes API, but it was removed in Helm v3 for security reasons.
+
+54. **How do you roll back a deployment in Kubernetes?**
+    - By using the command `kubectl rollout undo deployment <deployment_name>`.
+
+55. **What is a Canary Deployment in Kubernetes?**
+    - Canary Deployment gradually rolls out a new version of an application to a small subset of users, reducing the risk of failure.
+
+56. **What is Blue/Green Deployment in Kubernetes?**
+    - Blue/Green Deployment deploys two environments (blue and green), where one is live and the other is idle, allowing easy switchovers during updates.
+
+57.
+
+ **What is a Custom Resource Definition (CRD)?**
+    - CRD allows users to create custom objects and extend Kubernetes API without modifying the core Kubernetes code.
+
+58. **How do you create a custom controller in Kubernetes?**
+    - By writing a controller that listens to Kubernetes events and manipulates the cluster's state based on a CRD.
+
+59. **What are Admission Controllers?**
+    - Admission Controllers are plugins that govern and enforce policies on objects before they are persisted to etcd.
+
+60. **What is RBAC in Kubernetes?**
+    - Role-Based Access Control (RBAC) restricts users' access to Kubernetes resources based on their roles and permissions.
+
+61. **What is a ServiceAccount in Kubernetes?**
+    - ServiceAccounts are used by pods to authenticate themselves to the API server and make requests on behalf of applications.
+
+62. **What is an Init Container?**
+    - Init Containers are containers that run before app containers start and are used for tasks like setting up configurations or loading data.
+
+63. **What is the difference between StatefulSet and DaemonSet?**
+    - StatefulSet ensures ordered and unique pod identities for stateful applications, while DaemonSet ensures that a pod is running on each node.
+
+64. **What is the Pod lifecycle in Kubernetes?**
+    - The Pod lifecycle includes the phases: Pending, Running, Succeeded, Failed, and Unknown.
+
+65. **What are the types of Probes in Kubernetes?**
+    - LivenessProbe, ReadinessProbe, StartupProbe.
+
+66. **What is the difference between Liveness and Readiness Probe?**
+    - Liveness Probe checks if a pod is alive, while Readiness Probe checks if the pod is ready to accept traffic.
+
+67. **How do you debug a failed pod in Kubernetes?**
+    - By using `kubectl logs <pod_name>` or `kubectl describe pod <pod_name>` to view logs and events, and `kubectl exec` for interactive debugging.
+
+68. **What is Kubernetes Federation?**
+    - Kubernetes Federation allows the management of multiple clusters from a single control plane, enabling cross-cluster deployment and high availability.
+
+69. **What are taints and tolerations in Kubernetes?**
+    - Taints allow nodes to repel certain pods, and tolerations allow pods to be scheduled on nodes with matching taints.
+
+70. **What is a Sidecar pattern in Kubernetes?**
+    - A Sidecar pattern involves adding additional containers to a pod that work alongside the main application container, such as a logging agent.
+
+71. **What is the Operator pattern in Kubernetes?**
+    - The Operator pattern uses custom controllers to manage complex stateful applications, automating operational tasks.
+
+72. **How do you ensure high availability in a Kubernetes cluster?**
+    - By setting up a multi-master cluster, using replica sets for critical components, and ensuring redundancy across multiple nodes.
+
+73. **How do you backup and restore etcd?**
+    - By using `etcdctl` to create snapshots of etcd and restoring from these snapshots during disaster recovery.
+
+74. **What are Kubernetes annotations?**
+    - Annotations are arbitrary metadata attached to Kubernetes objects, typically used for non-identifying information.
+
+75. **What is the difference between rolling update and recreate strategy?**
+    - Rolling update gradually updates pods with zero downtime, while recreate kills all existing pods before creating new ones.
+
+### Real-World Scenarios
+
+76. **What happens when a pod goes into CrashLoopBackOff state?**
+    - This indicates that the container is repeatedly crashing after being started, likely due to misconfiguration or missing dependencies.
+
+77. **How do you handle resource contention in a cluster?**
+    - By properly setting CPU/memory requests and limits, and using resource quotas and priority classes.
+
+78. **How do you secure a Kubernetes cluster?**
+    - By using RBAC, Network Policies, enabling audit logs, securing etcd, and using pod security policies (PSPs).
+
+79. **How do you upgrade a Kubernetes cluster?**
+    - By following cloud provider or self-managed cluster-specific upgrade steps, upgrading the control plane first, followed by worker nodes.
+
+80. **How do you ensure service availability during node failure?**
+    - By ensuring pods are replicated across multiple nodes and using load balancers to distribute traffic across healthy nodes.
+
+81. **How do you troubleshoot Kubernetes networking issues?**
+    - By inspecting network policies, using `kubectl exec` to check connectivity between pods, and verifying CNI configurations.
+
+82. **How do you perform a cluster-wide resource audit?**
+    - By using tools like Prometheus for monitoring, and Kubernetes audit logs for tracking access and operations.
+
+83. **What is kubeadm, and how does it work?**
+    - `kubeadm` is a tool used to bootstrap Kubernetes clusters, handling the initial control plane setup and configurations.
+
+84. **What are the security risks in using Secrets in Kubernetes, and how do you mitigate them?**
+    - Secrets are base64-encoded and not encrypted by default. You can enable encryption at rest and restrict access using RBAC.
+
+85. **What are PodDisruptionBudgets (PDB)?**
+    - PDBs specify the minimum number of pods that should be up during voluntary disruptions like maintenance or scaling.
+
+86. **What is a PVC binding problem, and how do you resolve it?**
+    - When a PVC remains in a pending state, it may be due to insufficient storage or a misconfigured StorageClass. Resolving it may involve checking storage availability and reapplying the PVC.
+
+87. **How do you configure Kubernetes for multi-tenancy?**
+    - By using namespaces, network policies, RBAC, and resource quotas to isolate resources and users.
+
+88. **What are the challenges of running stateful applications in Kubernetes?**
+    - Challenges include handling persistent storage, ensuring data consistency during scaling, and managing pod restarts with StatefulSets.
+
+89. **What are Kubernetes PodPresets?**
+    - PodPresets allow injecting certain information like environment variables, volumes, or volume mounts into pods automatically.
+
+90. **What is the difference between a Job and a CronJob?**
+    - A Job runs once until completion, while a CronJob runs Jobs on a scheduled basis.
+
+91. **How do you configure Kubernetes clusters for disaster recovery?**
+    - By regularly backing up etcd, setting up multi-region clusters, and having a tested recovery plan in place.
+
+92. **What is the impact of node eviction on a cluster?**
+    - Node eviction may disrupt running workloads. Kubernetes reschedules the pods to healthy nodes, but there can be service disruption if not managed properly.
+
+93. **What is the role of TLS in securing Kubernetes Ingress?**
+    - TLS secures HTTP traffic between external clients and the services within the cluster by encrypting data.
+
+94. **How do you manage configuration drift in a Kubernetes environment?**
+    - By using declarative configuration management tools like Helm or GitOps with ArgoCD/Flux to ensure the cluster state aligns with desired configurations.
+
+95. **How do you perform canary testing in Kubernetes?**
+    - By splitting traffic between the stable version and a canary version of the application using Ingress rules or service mesh tools like Istio.
+
+96. **What is a Mutating Admission Webhook?**
+    - A Mutating Admission Webhook modifies or mutates the incoming requests to the Kubernetes API before they are persisted to etcd.
+
+97. **What is the purpose of container runtime in Kubernetes?**
+    - The container runtime is responsible for running containers. Kubernetes supports Docker, containerd, CRI-O, etc.
+
+98. **How does Kubernetes handle image pulling and caching?**
+    - Kubernetes pulls images from container registries, caching them locally on nodes to reduce pull time for repeated deployments.
+
+99. **What is kubeconfig?**
+    - `kubeconfig` is a configuration file used by `kubectl` to communicate with the Kubernetes cluster, containing credentials, server addresses, and other information.
+
+100. **How do you manage secrets in Helm charts?**
+    - By leveraging Kubernetes Secrets, and Helm can use tools like SOPS or Sealed Secrets to encrypt sensitive values and manage them in source control securely.
+
+---
+
+These questions cover a broad spectrum of Kubernetes concepts and will help prepare for intermediate-level Kubernetes interviews. Would you like to focus on any specific section in more detail?
